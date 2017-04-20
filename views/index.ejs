@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+    <% include partials/head %>
+    <body>
+        <main>
+            <% include partials/header %>
+            <article>
+                <ul>
+                    <% entries.forEach((entry, i) => { %>
+                        <li>
+                            <a href='/entry/<%= i %>'><%= entry.title %></a>
+                        </li>
+                    <% }); %>
+                </ul>
+            </article>
+            <% include partials/form %>
+            <% include partials/footer %>
+        </main>
+    </body>
+</html>
+
