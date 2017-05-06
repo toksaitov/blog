@@ -1,0 +1,5 @@
+<form method="POST" <% if (entry && entry.id) { %>action="/entry/<%= entry.id %>/update"<% } else { %>action="/entry/create"<% } %>>
+    <input type="text" name="title" placeholder="Enter the title" value="<%= entry ? entry.title : '' %>" required><br>
+    <textarea name="content" rows="20" cols="40" placeholder="Enter the blog entry" required><%= entry ? entry.content : '' %></textarea><br>
+    <input type="submit" value="Create a Blog Entry">
+</form>

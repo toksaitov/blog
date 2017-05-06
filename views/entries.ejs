@@ -4,16 +4,18 @@
     <body>
         <main>
             <% include partials/header %>
+            <% include partials/user-toolbar %>
+            <% include partials/error-box %>
             <article>
                 <ul>
-                    <% entries.forEach((entry, i) => { %>
+                    <% for (let [id, entry] of Object.entries(entries)) { %>
                         <li>
-                            <a href='/entry/<%= i %>'><%= entry.title %></a>
+                            <a href='/entry/<%= entry.id %>'><%= entry.title %></a>
                         </li>
-                    <% }); %>
+                    <% } %>
                 </ul>
             </article>
-            <% include partials/form %>
+            <% include partials/entries-toolbar %>
             <% include partials/footer %>
         </main>
     </body>

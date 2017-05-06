@@ -1,4 +1,29 @@
 body {
     background-color: hsl(200, 100%, 92%);
+    font: 16px arial, sans-serif;
+}
+
+.toolbar input[type="submit"] {
+    background: none!important;
+    color: inherit;
+    border: none;
+    padding: 0!important;
+    font: inherit;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.error {
+    padding: 1em;
+    border: 0.1em dashed red;
+    background-color: hsl(100, 100%, 90%);
+}
+
+a, a:visitited, .toolbar input[type="submit"] {
+    color: blue;
+}
+
+.comment > .login {
+    font-weight: bold;
 }
 
