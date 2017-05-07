@@ -9,8 +9,8 @@ const session =
     require('express-session')
 const Sequelize =
     require('sequelize');
-const scrypt =
-    require("scrypt");
+const bcrypt =
+    require('bcryptjs');
 const dotenv =
     require('dotenv').config();
 
@@ -100,8 +100,8 @@ if (!sessionSecret) {
     );
 }
 
-const scryptMaxTime =
-    parseFloat(process.env['BLOG_SCRYPT_MAXTIME'] || '0.1');
+const bcryptSaltLength =
+    parseFloat(process.env['BLOG_BCRYPT_SALT_LENGTH'] || '32');
 
 const adminPassword = process.env['BLOG_ADMIN_PASSWORD'];
 if (!adminPassword) {
@@ -213,10 +213,7 @@ server.post('/login', (request, response) => {
     }
 
     User.findOne({ 'where': { 'login': login } }).then(user => {
-        const credentials =
-            new Buffer(user.credentials, 'base64');
-
-        if (!scrypt.verifyKdfSync(credentials, password)) {
+        if (!bcrypt.compareSync(password, user.credentials)) {
             request.session.errors.push('The login or password is not valid.')
             response.redirect(destination);
 
@@ -523,26 +520,20 @@ server.post([
 
 database.sync().then(() => {
     const credentials =
-        scrypt.kdfSync(
-            adminPassword,
-            scrypt.paramsSync(scryptMaxTime)
-        );
+        bcrypt.hashSync(adminPassword, bcryptSaltLength);
 
     return User.upsert({
         'login': 'administrator',
-        'credentials': credentials.toString('base64'),
+        'credentials': credentials,
         'administrator': true
     });
 }).then(() => {
     const credentials =
-        scrypt.kdfSync(
-            userPassword,
-            scrypt.paramsSync(scryptMaxTime)
-        );
+        bcrypt.hashSync(userPassword, bcryptSaltLength);
 
     return User.upsert({
         'login': 'user',
-        'credentials': credentials.toString('base64'),
+        'credentials': credentials,
         'administrator': true
     });
 }).then(() => {

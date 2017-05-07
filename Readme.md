@@ -10,7 +10,7 @@ Blog is a simple blog web application.
 
 ## Usage
 
-Create the `.env` file with secrets and parameters for all the components.
+Create an `.env` file with secrets and parameters for all the components.
 
 ```bash
 # Database
@@ -25,13 +25,17 @@ BLOG_SERVER_PORT=the port to use by the server
 # Session
 BLOG_SESSION_SECRET=session secret to use with cookies
 
-# scrypt
-BLOG_SCRYPT_MAXTIME=how much scrypt will spend computing the key
+# bcrypt
+BLOG_BCRYPT_SALT_LENGTH=length for the random salt
 
 # Default Users
 BLOG_ADMIN_PASSWORD=administrator password
 BLOG_USER_PASSWORD=test user password
 ```
+
+Create the database and the database user with the password specified in the
+previous step in `.env` file (you can use MySQL Workbench, other management
+tools, or issue SQL queries manually from the `mysql` command).
 
 Install dependencies, ensure the database system is running, and start the
 server.
@@ -41,8 +45,16 @@ npm install # to install dependencies
 npm start   # to start the server
 ```
 
-Note that the `scrypt` is a native Node.js module. A C++ compiler is required
-to build the library.
+You can also use a local testing database stored in the `development` directory.
+
+Ensure that MySQL was installed, and the `mysqld` binary is in the `PATH`
+environment variable.
+
+```bash
+cd development
+./bootstrap # create the database, install dependencies; run it only once
+./start     # start MySQL with the local database and the blog server
+```
 
 ## Credits
 
