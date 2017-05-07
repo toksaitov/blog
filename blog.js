@@ -82,7 +82,7 @@ if (databasePassword == null) {
     );
 }
 
-const serverPort = process.env['BLOG_SERVER_PORT'];
+let serverPort = process.env['BLOG_SERVER_PORT'];
 if (serverPort == null) {
     serverPort = '8080';
 
@@ -534,7 +534,7 @@ database.sync().then(() => {
     return User.upsert({
         'login': 'user',
         'credentials': credentials,
-        'administrator': true
+        'administrator': false
     });
 }).then(() => {
     server.listen(serverPort, () => {

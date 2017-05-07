@@ -14,19 +14,21 @@ Create an `.env` file with secrets and parameters for all the components.
 
 ```bash
 # Database
-BLOG_DATABASE_DIALECT=the dialect of the database management engine
-BLOG_DATABASE_NAME=the name of the database
-BLOG_DATABASE_USER=the user of the database with write permissions
-BLOG_DATABASE_PASSWORD=his pasword
+BLOG_DATABASE_HOST=the location of the database server (localhost by default)
+BLOG_DATABASE_PORT=the database port (3306 by default)
+BLOG_DATABASE_DIALECT=the dialect of the database management engine (mysql by default)
+BLOG_DATABASE_NAME=the name of the database (blog by default)
+BLOG_DATABASE_USER=the user of the database with write permissions (blog_user by default)
+BLOG_DATABASE_PASSWORD=his pasword (empty by default)
 
 # Server
-BLOG_SERVER_PORT=the port to use by the server
+BLOG_SERVER_PORT=the port to use by the server (8080 by default)
 
 # Session
 BLOG_SESSION_SECRET=session secret to use with cookies
 
 # bcrypt
-BLOG_BCRYPT_SALT_LENGTH=length for the random salt
+BLOG_BCRYPT_SALT_LENGTH=length of the random salt (8 by default)
 
 # Default Users
 BLOG_ADMIN_PASSWORD=administrator password
