@@ -284,7 +284,7 @@ server.get(['/entry/create', '/entry/:id/update'], (request, response) => {
             return;
         }
 
-        Entry.findById(id).then(entry => {
+        Entry.findByPk(id).then(entry => {
             response.render('entry-create-update', {
                 'session': request.session,
                 'entry': entry
@@ -419,7 +419,7 @@ server.get('/entry/:id', (request, response) => {
         return;
     }
 
-    Entry.findById(id, {
+    Entry.findByPk(id, {
         'include': [ {
             'model': Comment,
             'include': [ User ]
